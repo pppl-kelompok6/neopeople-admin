@@ -1,7 +1,6 @@
+import Layout from '../../src/components/MainLayout'
 
-import Layout from '../src/components/MainLayout'
-
-export default function App() {
+export default function Home() {
   return (
     <div className='flex flex-cols'>
       <Layout/>
