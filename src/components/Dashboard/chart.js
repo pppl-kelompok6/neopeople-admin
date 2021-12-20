@@ -15,31 +15,31 @@ export default function Chart(){
           amt: 2210,
         },
         {
-          name: 'Page C',
+          name: 'Rabu',
           uv: 2000,
           pv: 9800,
           amt: 2290,
         },
         {
-          name: 'Page D',
+          name: 'Kamis',
           uv: 2780,
           pv: 3908,
           amt: 2000,
         },
         {
-          name: 'Page E',
+          name: 'Jumat',
           uv: 1890,
           pv: 4800,
           amt: 2181,
         },
         {
-          name: 'Page F',
+          name: 'Sabtu',
           uv: 2390,
           pv: 3800,
           amt: 2500,
         },
         {
-          name: 'Page G',
+          name: 'Minggu',
           uv: 3490,
           pv: 4300,
           amt: 2100,
@@ -48,11 +48,12 @@ export default function Chart(){
 
     return(
         <div className='w-full h-[90%]'>
+          <h3 className='font-normal text-[22px] ml-4 mb-1'>Visitor chart</h3>
           <ResponsiveContainer 
             width="100%" height= "100%">
             <LineChart
                 width={500}
-                height={300}
+                height={250}
                 data={data}
                 margin={{ top: 5, right: 40, left: 5, bottom: 5 }}
                 >

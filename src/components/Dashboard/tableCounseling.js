@@ -1,13 +1,13 @@
 import DataTable from "react-data-table-component"
 
-export default function TableMoney(){
+export default function TableCounseling(){
 
-    const ExpandedComponent = ({ data }) => 
-            <pre>
-                <div className="w-full h-[100px]">
+    // const ExpandedComponent = ({ data }) => 
+    //         <pre>
+    //             <div className="w-full h-[100px]">
 
-                </div>
-            </pre>;
+    //             </div>
+    //         </pre>;
     const columns = [
         {
             name: 'title',
@@ -21,55 +21,52 @@ export default function TableMoney(){
             name: 'time',
             selector: row => row.time,
         },
+
         {
-            name: 'speaker',
-            selector: row => row.speaker,
-        },
-        {
-            name: 'status',
-            selector: row => row.status,
+            name: 'patient',
+            selector: row => row.patient,
         },
     ];
     
     const data = [
         {
             id: 1,
-            title: 'Beetlejuice',
+            title: 'Session 1',
             date: '2000-02-30',
             time: '14:10-15:10',
-            speaker: 'Lala',
-            status: 'Upcomming'
+            mentor: 'Lala',
+            patient: 'Ridho'
         },
         {
             id: 2,
-            title: 'Last Day',
+            title: 'Session 2',
             date: '2000-10-30',
             time: '14:10-15:10',
-            speaker: 'Lala',
-            status: 'Upcomming'
+            mentor: 'Lala',
+            patient: 'Kevin'
         },
         {
             id: 3,
-            title: 'Capital Building',
+            title: 'Session 3',
             date: '2000-10-30',
             time: '14:10-15:10',
-            speaker: 'Doni',
-            status: 'Upcomming'
+            mentor: 'Doni',
+            patient: 'Samuel'
         },
         {
             id: 4,
-            title: 'No moon on October',
+            title: 'Session 3',
             date: '2000-11-31',
             time: '12:10-15:10',
-            speaker: 'Ridho',
-            status: 'Upcomming'
+            mentor: 'Ridho',
+            patient: 'Lala'
         },
 
     ]
     return(
         <div className="h-full w-full bg-red-100 flex flex-col items-center justify-center">
             <DataTable
-                title="All events"
+                title="Counseling Schedule"
                 columns={columns}
                 data={data}
                 direction="auto"

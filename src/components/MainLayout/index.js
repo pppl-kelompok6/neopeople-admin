@@ -9,6 +9,7 @@ export default function Layout(props) {
                 <div class="w-full h-full flex flex-col justify-between">
                     <Navbar/>
                     <div className="max-w-full h-full flex relative overflow-y-scroll overflow-x-hidden">{children}</div>
+                    
                 </div>
 
             </div>

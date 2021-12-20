@@ -1,23 +1,25 @@
 import Layout from '../src/components/MainLayout'
 import Chart from '../src/components/Dashboard/chart'
 import TableMoney from '../src/components/Dashboard/tableMoney'
+import TableCounseling from '../src/components/Dashboard/tableCounseling'
+import DataTable from 'react-data-table-component'
+import FooterBar from '../src/components/Footer'
 
 export default function App() {
   return (
     <Layout>
-      <div className='w-full flex flex-col'>
-        <div className='w-full h-[52%] flex flex-row gap-8'>
-          <div className='w-[50%] bg-gray-100 m-4 rounded-md drop-shadow-xl border-2 flex flex-col justify-center items-start overflow-hidden'>
-              <p className='h-[10%]'>Money Chart</p>
+      <div className='w-full h-[150vh] flex flex-col'>
+        <div className='w-full h-[32%] flex flex-row gap-8'>
+          <div className='w-[50%] bg-white m-4 rounded-md drop-shadow-lg border-2 flex flex-col justify-center items-start overflow-hidden'>
               <Chart/>
           </div>
-          <div className='w-[50%] bg-gray-100 m-4 rounded-md drop-shadow-xl border-2 overflow-scroll overflow-x-hidden'>
+          <div className='w-[50%] bg-white m-4 rounded-md drop-shadow-lg border-2 overflow-hidden'>
               <TableMoney/>
           </div>
         </div>
-        <div className='w-full h-[18%] flex flex-row items-center justify-around gap-4 '>
+        <div className='w-full h-[23%] flex flex-row items-center justify-around gap-4 '>
           {/*  */}
-            <div class="bg-gray-100 rounded-md drop-shadow-xl border-2 p-4 sm:p-6 xl:p-8 ">
+            <div class="bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
                <div class="flex items-center">
                   <div class="flex-shrink-0">
                     <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">2,340</span>
@@ -32,7 +34,7 @@ export default function App() {
              </div>
             </div>
 
-          <div class="bg-gray-100 rounded-md drop-shadow-xl border-2 p-4 sm:p-6 xl:p-8 ">
+          <div class="bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">385</span>
@@ -47,7 +49,7 @@ export default function App() {
             </div>
           </div>
 
-          <div class="bg-gray-100 rounded-md drop-shadow-xl border-2 p-4 sm:p-6 xl:p-8 ">
+          <div class="bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">385</span>
@@ -62,7 +64,7 @@ export default function App() {
             </div>
           </div>
 
-          <div class="bg-gray-100 rounded-md drop-shadow-xl border-2 p-4 sm:p-6 xl:p-8 ">
+          <div class="bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">385</span>
@@ -78,7 +80,16 @@ export default function App() {
           </div>
         </div>
         
-        <div className='w-full h-[30%]'>
+        <div className='w-full h-[30%] flex flex-row items-center justify-center gap-8'>
+          <div className='w-[50%] m-4 h-full bg-white rounded-md drop-shadow-lg border-2'>
+              <TableCounseling/>
+          </div>
+          <div className='w-[50%] m-4 h-full bg-white rounded-md drop-shadow-lg border-2'>
+
+          </div>
+        </div>
+        <div className='w-full h-[15%] flex items-end justify-center'>
+          <FooterBar/>
         </div>
       </div>
   </Layout>

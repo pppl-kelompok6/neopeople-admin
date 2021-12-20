@@ -24,13 +24,16 @@ export default function ListEvents({eventData}){
         },
     ]
     return(
-		<DataTable
-			title="Contact List"
-			columns={columns}
-			data={eventData.eventData}
-			pagination
-			selectableRows
-			persistTableHead
-		/>
+            <DataTable
+            title="Event List"
+            columns={columns}
+            data={eventData.eventData}
+            direction="auto"
+            pointerOnHover
+            responsive
+            highlightOnHover
+            pagination
+            
+        />
     )
 }
