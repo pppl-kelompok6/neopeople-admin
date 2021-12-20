@@ -64,6 +64,14 @@ export default function TableMoney(){
             speaker: 'Ridho',
             status: 'Upcomming'
         },
+        {
+            id: 5,
+            title: 'No moon on October',
+            date: '2000-11-31',
+            time: '12:10-15:10',
+            speaker: 'Ridho',
+            status: 'Upcomming'
+        },
 
     ]
     return(

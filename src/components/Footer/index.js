@@ -2,7 +2,7 @@
 
 export default function FooterBar(){
     return(
-        <footer class="w-full bg-white md:flex md:items-center md:justify-between drop-shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
+        <footer class="w-full bg-white md:flex md:items-center md:justify-between drop-shadow rounded-lg md:p-6 xl:p-8 ">
             <ul class="flex items-center flex-wrap mb-6 md:mb-0">
                <li><a href="#" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Terms and conditions</a></li>
                <li><a href="#" class="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Privacy Policy</a></li>

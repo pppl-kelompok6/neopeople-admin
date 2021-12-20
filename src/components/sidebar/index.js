@@ -52,6 +52,7 @@ export default function SideBar() {
             />
       </a>
     </div>
+    
   </aside>
 
   )
