@@ -6,6 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@devexpress/dx-react-core": "^2.7.6",
+    "@devexpress/dx-react-scheduler": "^2.7.6",
+    "@devexpress/dx-react-scheduler-material-ui": "^2.7.6",
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
     "next": "latest",
