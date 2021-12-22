@@ -16,7 +16,7 @@ export default function Navbar(){
                 </div>
                 
                 {/* <!-- Foto --> */}
-                <div onClick={()=>{setOpen(!open)}} 
+                <div onClick={()=>{setOpen(!open); }} 
                         class="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400 hover:bg-gray-400">
                 </div>
                 <div className={` ${open ? "right-10 top-12 opacity-100" : "opacity-0 right-10 top-10 "} 
@@ -31,7 +31,7 @@ export default function Navbar(){
                     <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                     Settings
                     </a>
-                    <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+                    <a href="/auth" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                     Sign Out
                     </a>
                 </div>

@@ -9,15 +9,15 @@ export default function App() {
   return (
     <Layout>
       <div className='grid grid-cols-2 gap-8 p-8'>
-          <div className='w-full bg-white rounded-md drop-shadow-lg border-2 overflow-hidden'>
+          <div className='col-span-2 sm:col-span-1 w-full bg-white rounded-md drop-shadow-lg border-2 overflow-hidden'>
               <Chart/>
           </div>
-          <div className='w-full bg-white rounded-md drop-shadow-lg border-2 overflow-hidden'>
+          <div className='col-span-2 sm:col-span-1 w-full bg-white rounded-md drop-shadow-lg border-2 overflow-hidden'>
               <TableMoney/>
           </div>
-          <div className='col-span-2 grid grid-cols-4 gap-8'>
+          <div className='col-span-2 grid lg:grid-cols-4 sm:grid-cols-2 gap-8'>
             {/*  */}
-            <div class="row-spans-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
+            <div class="row-span-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                       <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">2,340</span>
@@ -32,7 +32,7 @@ export default function App() {
               </div>
               </div>
 
-            <div class="row-spans-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
+            <div class="row-span-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">385</span>
@@ -47,7 +47,7 @@ export default function App() {
               </div>
             </div>
 
-            <div class="row-spans-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
+            <div class="row-span-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">385</span>
@@ -62,7 +62,7 @@ export default function App() {
               </div>
             </div>
 
-            <div class="row-spans-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
+            <div class="row-span-1 bg-white rounded-md drop-shadow-lg border-2 p-4 sm:p-6 xl:p-8 ">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
                   <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">385</span>
@@ -78,15 +78,15 @@ export default function App() {
             </div>
           </div>
         
-        <div className='col-span-2 grid grid-cols-2 gap-8'>
+        <div className='col-span-2 grid lg:grid-cols-2 sm:grid-cols-1 gap-8'>
           <div className='w-full h-full bg-white rounded-md drop-shadow-lg border-2'>
               <TableCounseling/>
           </div>
           <div className='w-full h-full bg-white rounded-md drop-shadow-lg border-2'>
-
+              <TableCounseling/>
           </div>
         </div>
-        <div className='col-span-2 flex items-end justify-center'>
+        <div className='col-span-2 grid'>
           <FooterBar/>
         </div>
       </div>

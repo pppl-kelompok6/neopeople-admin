@@ -56,26 +56,10 @@ export default function TableMoney(){
             speaker: 'Doni',
             status: 'Upcomming'
         },
-        {
-            id: 4,
-            title: 'No moon on October',
-            date: '2000-11-31',
-            time: '12:10-15:10',
-            speaker: 'Ridho',
-            status: 'Upcomming'
-        },
-        {
-            id: 5,
-            title: 'No moon on October',
-            date: '2000-11-31',
-            time: '12:10-15:10',
-            speaker: 'Ridho',
-            status: 'Upcomming'
-        },
 
     ]
     return(
-        <div className="h-full w-full bg-red-100 flex flex-col items-center justify-center">
+        <div className="h-full w-full bg-white flex flex-col items-center justify-center">
             <DataTable
                 title="All events"
                 columns={columns}

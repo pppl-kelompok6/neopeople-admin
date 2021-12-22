@@ -1,0 +1,9 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bTgCEZ{
+    height: 100% !important;
+    max-height: 400px !important;
+}

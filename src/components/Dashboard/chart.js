@@ -48,19 +48,18 @@ export default function Chart(){
 
     return(
         <div className='w-full h-[90%]'>
-          <h3 className='font-normal text-[22px] ml-4 mb-1'>Visitor chart</h3>
+          <h3 className='font-normal text-[22px] ml-4 mt-4'>Visitor chart</h3>
           <ResponsiveContainer 
             width="100%" height= "100%">
             <LineChart
                 width={500}
                 height={250}
                 data={data}
-                margin={{ top: 5, right: 40, left: 5, bottom: 5 }}
+                margin={{ top: 30, right: 40, left: 5, bottom: 20 }}
                 >
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Legend/>
                 <CartesianGrid stroke="#f5f5f5" />
                 <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} />
             </LineChart>

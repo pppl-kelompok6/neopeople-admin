@@ -17,7 +17,7 @@ export default function Events(eventData) {
   console.log(eventData)
   return (
       <Layout>
-        <div className='h-[150vh] flex flex-col items-center justify-center gap-4'>
+        <div className='h-fit flex flex-col items-center justify-center gap-4'>
           <CreateEvent/>
           <ListEvents eventData= {eventData}/>
         </div>

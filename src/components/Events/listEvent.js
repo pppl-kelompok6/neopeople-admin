@@ -24,16 +24,17 @@ export default function ListEvents({eventData}){
         },
     ]
     return(
+        <div className='w-full h-full p-8'>
             <DataTable
-            title="Event List"
-            columns={columns}
-            data={eventData.eventData}
-            direction="auto"
-            pointerOnHover
-            responsive
-            highlightOnHover
-            pagination
-            
-        />
+                title="Event List"
+                columns={columns}
+                data={eventData.eventData}
+                direction="auto"
+                pointerOnHover
+                responsive
+                highlightOnHover
+                pagination
+            />
+        </div>
     )
 }
