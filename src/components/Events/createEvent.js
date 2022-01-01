@@ -3,14 +3,13 @@ export default function CreateEvent(){
 
     return(
         <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 m-8">
-                <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                 <div className="text-gray-600">
                     <p className="font-medium text-lg">Create New Event</p>
                     <p>Please fill out all the fields.</p>
-                    <div className="mt-2 border-dashed border rounded w-fit h-[150px] ">
-
-                    </div>
                 </div>
+                <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                    <div className="mt-2 border-dashed border rounded w-fit h-[150px] ">
+                    </div>
 
                 <div className="lg:col-span-2">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">

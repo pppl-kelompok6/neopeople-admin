@@ -3,7 +3,7 @@ import CreateEvent from '../../src/components/Events/createEvent'
 import ListEvents from '../../src/components/Events/listEvent'
 
 export const getServerSideProps = async context =>{
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/');
+  const res = await fetch('https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/events');
   
   const data = await res.json();
   
