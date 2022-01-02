@@ -2,7 +2,18 @@ import Calender from '../../src/components/konselingProps/calender'
 import ListCounseler from '../../src/components/konselingProps/ListCounseler'
 import Layout from '../../src/components/MainLayout'
 
-export default function Counseling() {
+export const getServerSideProps = async context =>{
+  const res = await fetch('https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/counselor')
+  const data = await res.json()
+  return{
+    props:{
+      counselorData: data
+    }
+  }
+}
+
+export default function Counseling(counselorData) {
+  console.log(counselorData.counselorData)
   return (
       <Layout>
           <div className="bg-white rounded shadow-lg p-8 m-8 px-4 ">
@@ -13,7 +24,7 @@ export default function Counseling() {
             <div className="grid grid-cols-3 gap-8  ">
               
               <div className="sm:col-span-1 col-span-3">
-                <ListCounseler/>
+                <ListCounseler counselorData={counselorData.counselorData}/>
               </div>
               <div className="sm:col-span-2 col-span-3">
                 <Calender/>
