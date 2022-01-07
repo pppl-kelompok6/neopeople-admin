@@ -4,8 +4,19 @@ import TableMoney from '../src/components/Dashboard/tableMoney'
 import TableCounseling from '../src/components/Dashboard/tableCounseling'
 import DataTable from 'react-data-table-component'
 import FooterBar from '../src/components/Footer'
+import { getCookies } from '../src/services/auth'
+import { useEffect } from 'react'
+import Router from "next/router";
+
 
 export default function App() {
+  useEffect(()=>{
+    const coockies = getCookies("Token");
+    if(coockies===""){
+      Router.push('/auth')
+    }
+  }, [])
+  
   return (
     <Layout>
       <div className='grid grid-cols-2 gap-8 p-8'>

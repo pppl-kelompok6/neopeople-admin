@@ -1,6 +1,38 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
+import { useEffect, useState } from 'react'
+import CONFIG from '../../src/services/CONFIG';
+import Cookies from 'js-cookie';
+import Router from 'next/router';
+import Swal from 'sweetalert2';
 
-const login = () =>{
+export default function login(){
+    const [user, setUser] = useState({
+        email: "",
+        password: ""
+    });
+
+    async function submitLogin(e){
+        e.preventDefault()
+        const res = await fetch(`${CONFIG.BASE_URL}/login`, {
+            method: "POST",
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        if(res.status==200){
+            const data = await res.json()
+            Cookies.set("Token", data.token, {expires: 0.5})
+            Router.push('/')
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Wrong password!',
+              })
+        }
+
+    }
 
     return(
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -8,7 +40,7 @@ const login = () =>{
         <div>
             <img
             className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+            src="/Neo-people-logo.png"
             alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
@@ -19,7 +51,9 @@ const login = () =>{
             </a>
             </p> */}
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6" onSubmit={(e)=>{
+            submitLogin(e)
+        }}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -34,6 +68,12 @@ const login = () =>{
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
+                onChange={(e)=>{
+                    setUser({
+                        ...user,
+                        email: e.target.value 
+                    })
+                }}
                 />
             </div>
             <div>
@@ -48,6 +88,12 @@ const login = () =>{
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+                onChange={(e)=>{
+                    setUser({
+                        ...user,
+                        password: e.target.value 
+                    })
+                }}
                 />
             </div>
             </div>
@@ -66,7 +112,7 @@ const login = () =>{
             </div>
 
             <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a href="" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Forgot your password?
                 </a>
             </div>
@@ -75,10 +121,10 @@ const login = () =>{
             <div>
             <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                <LockClosedIcon className="h-5 w-5 text-yellow-600 group-hover:text-yellow-400" aria-hidden="true" />
                 </span>
                 Sign in
             </button>
@@ -89,4 +135,3 @@ const login = () =>{
     )
 }
 
-export default login;

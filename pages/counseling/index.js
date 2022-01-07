@@ -1,10 +1,20 @@
 import Calender from '../../src/components/konselingProps/calender'
 import ListCounseler from '../../src/components/konselingProps/ListCounseler'
 import Layout from '../../src/components/MainLayout'
+import CONFIG from '../../src/services/CONFIG'
 
 export const getServerSideProps = async context =>{
-  const res = await fetch('https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/counselor')
-  const data = await res.json()
+  const {req} = context
+  const {cookies} = req
+  const res = await fetch(`${CONFIG.BASE_URL}/counselor`,{
+    headers:{
+      "Token": cookies.Token
+    }
+  })
+  var data = ""
+  if(res.status == 200){
+    data = await res.json()
+  }
   return{
     props:{
       counselorData: data

@@ -1,17 +1,19 @@
 import Link from "next/link"
 import { useState } from "react"
+import CONFIG from "../../services/CONFIG"
+import Cookies from "js-cookie"
 
-export default function EventEditProps({eventData}){
+export default function EventEditProps({eventData, cover}){
     
-    const [eventState, setEventState] = useState(eventData)
-
+    const [eventState, setEventState] = useState(eventData[0])
     async function putEvent(e) {
         e.preventDefault()
+        eventState.cover = cover
         // console.log(eventState)
-        await fetch(`https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/events/${eventState.id}`,{
+        await fetch(`${CONFIG.BASE_URL}/events/${eventState.ID}`,{
             method: "PUT",
             headers: {
-                'Content-Type':'application/json'
+                "Token": Cookies.get("Token"),                
             },
             body: JSON.stringify(eventState)
         }).then(()=>{
@@ -28,14 +30,16 @@ export default function EventEditProps({eventData}){
                     <p>Please fill out all the fields.</p>
                 </div>
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                    <div className="mt-2 border-dashed border rounded w-fit h-[150px] ">
-                    </div>
+                    <div className="mt-2 border-dashed border rounded w-fit ">
+                    <img className="w-140" src={eventData[0].cover}></img>
+                </div>
+                
 
                 <div className="lg:col-span-2">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     <div className="md:col-span-5">
                         <label for="full_name">Title</label>
-                        <input  defaultValue={eventState.event_name} type="text" name="title" id="title" 
+                        <input  defaultValue={eventData[0].event_name} type="text" name="title" id="title" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="Event Title" 
                                 onChange={(e)=>{
                                     setEventState({
@@ -48,12 +52,12 @@ export default function EventEditProps({eventData}){
 
                     <div className="md:col-span-5">
                         <label for="email">Description</label>
-                        <textarea   defaultValue={eventState.Description} name="description" id="description" 
+                        <textarea   defaultValue={eventData[0].description} name="description" id="description" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="New Description"
                                     onChange={(e)=>{
                                         setEventState({
                                             ...eventState,
-                                            Description: e.target.value
+                                            description: e.target.value
                                         })
                                     }}
                                     />
@@ -61,7 +65,7 @@ export default function EventEditProps({eventData}){
 
                     <div className="md:col-span-2">
                         <label for="address">Speaker Name</label>
-                        <input  defaultValue={eventState.speaker} type="text" name="speakerName" id="speakerName" 
+                        <input  defaultValue={eventData[0].speaker} type="text" name="speakerName" id="speakerName" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="Name of the speaker"
                                 onChange={(e)=>{
                                     setEventState({
@@ -74,7 +78,7 @@ export default function EventEditProps({eventData}){
 
                     <div className="md:col-span-2">
                         <label for="city">Speaker Company</label>
-                        <input  defaultValue={eventState.speaker_company} type="text" name="speakerCompany" id="speakerCompany" 
+                        <input  defaultValue={eventData[0].speaker_company} type="text" name="speakerCompany" id="speakerCompany" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="Company name"
                                 onChange={(e)=>{
                                     setEventState({
@@ -86,7 +90,7 @@ export default function EventEditProps({eventData}){
                     </div>
                     <div className="md:col-span-1">
                         <label for="city">Speaker Role</label>
-                        <input  defaultValue={eventState.speaker_job} type="text" name="speakerRole" id="speakerRole" 
+                        <input  defaultValue={eventData[0].speaker_job} type="text" name="speakerRole" id="speakerRole" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="Proffesion"
                                 onChange={(e)=>{
                                     setEventState({
@@ -98,20 +102,46 @@ export default function EventEditProps({eventData}){
                     </div>
                     <div className="md:col-span-2">
                         <label for="address">Date </label>
-                        <input type="date" name="price" id="price" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="0"/>
-                    </div>
-                    <div className="md:col-span-2">
-                        <label for="address">Time </label>
-                        <input type="time" name="price" id="price" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="0"/>
-                    </div>
-                    <div className="md:col-span-1">
-                        <label for="address">Price </label>
-                        <input  defaultValue={eventState.price} type="number" name="price" id="price" 
+                        <input type="date" name="price" value={eventData[0].date.slice(0,10)} id="price" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="0"
                                 onChange={(e)=>{
                                     setEventState({
                                         ...eventState,
-                                        price: e.target.value
+                                        date: e.target.value
+                                    })
+                                }}
+                                />
+                    </div>
+                    <div className="md:col-span-2">
+                        <label for="address">Time </label>
+                        <input type="time" name="price" id="price" value={eventData[0].started_at.slice(11,16)} 
+                                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" 
+                                onChange={(e)=>{
+                                    setEventState({
+                                        ...eventState,
+                                        date: `${data.date} ${e.target.value}`
+                                    })
+                                }} 
+
+                                />
+                        <input type="time" name="price" id="price" value={eventData[0].finish_at.slice(11,16)}
+                                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
+                                onChange={(e)=>{
+                                    setEventState({
+                                        ...eventState,
+                                        date: `${data.date} ${e.target.value}`
+                                    })
+                                }} 
+                                />
+                    </div>
+                    <div className="md:col-span-1">
+                        <label for="address">Price </label>
+                        <input  defaultValue={eventData[0].price} type="number" name="price" id="price" 
+                                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="0"
+                                onChange={(e)=>{
+                                    setEventState({
+                                        ...eventState,
+                                        price: parseInt(e.target.value)
                                     })
                                 }}
                                 />
@@ -129,13 +159,6 @@ export default function EventEditProps({eventData}){
 
 
 
-
-                    <div className="md:col-span-5">
-                        <div className="inline-flex items-center">
-                        <input type="checkbox" name="billing_same" id="billing_same" className="form-checkbox"/>
-                        <label for="billing_same" className="ml-2">My billing address is different than above.</label>
-                        </div>
-                    </div>
 
                     <div className="md:col-span-5 text-right">
                         <div className="inline-flex items-end">

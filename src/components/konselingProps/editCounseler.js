@@ -3,17 +3,17 @@ import { useState } from "react"
 
 export default function CounselerEditProps({mentorData}){
     
-    const [eventState, setEventState] = useState(mentorData)
+    const [mentorState, setmentorState] = useState(mentorData)
 
     async function putEvent(e) {
         e.preventDefault()
-        // console.log(eventState)
-        await fetch(`https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/events/${eventState.id}`,{
+        // console.log(mentorState)
+        await fetch(`https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/events/${mentorState.id}`,{
             method: "PUT",
             headers: {
                 'Content-Type':'application/json'
             },
-            body: JSON.stringify(eventState)
+            body: JSON.stringify(mentorState)
         }).then(()=>{
             console.log("berhasil")
         }).catch((err)=>{
@@ -24,7 +24,7 @@ export default function CounselerEditProps({mentorData}){
     return(
         <form onSubmit={(e)=>{putEvent(e)}} className="bg-white rounded shadow-lg p-4 px-4 md:p-8 m-8">
                 <div className="text-gray-600">
-                    <p className="font-medium text-lg">Edit Event</p>
+                    <p className="font-medium text-lg">Edit Counselor</p>
                     <p>Please fill out all the fields.</p>
                 </div>
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
@@ -35,12 +35,12 @@ export default function CounselerEditProps({mentorData}){
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     <div className="md:col-span-5">
                         <label for="full_name">Full Name</label>
-                        <input  defaultValue={eventState.name} type="text" name="title" id="title" 
+                        <input  defaultValue={mentorState.name} type="text" name="title" id="title" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="Event Title" 
                                 onChange={(e)=>{
-                                    setEventState({
-                                        ...eventState,
-                                        event_name: e.target.value
+                                    setmentorState({
+                                        ...mentorState,
+                                        name: e.target.value
                                     })
                                 }}
                                 />
@@ -48,12 +48,12 @@ export default function CounselerEditProps({mentorData}){
 
                     <div className="md:col-span-5">
                         <label for="email">email</label>
-                        <input   defaultValue={eventState.email} name="description" id="description" 
+                        <input   defaultValue={mentorState.email} name="description" id="description" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="New Description"
                                     onChange={(e)=>{
-                                        setEventState({
-                                            ...eventState,
-                                            Description: e.target.value
+                                        setmentorState({
+                                            ...mentorState,
+                                            email: e.target.value
                                         })
                                     }}
                                     />
@@ -61,12 +61,12 @@ export default function CounselerEditProps({mentorData}){
 
                     <div className="md:col-span-2">
                         <label for="address">Phone Number (WA)</label>
-                        <input  defaultValue={eventState.phone_number} type="text" name="speakerName" id="speakerName" 
+                        <input  defaultValue={mentorState.phone_number} type="text" name="speakerName" id="speakerName" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="Name of the speaker"
                                 onChange={(e)=>{
-                                    setEventState({
-                                        ...eventState,
-                                        speaker: e.target.value
+                                    setmentorState({
+                                        ...mentorState,
+                                        phone_number: e.target.value
                                     })
                                 }}
                                 />
@@ -74,36 +74,36 @@ export default function CounselerEditProps({mentorData}){
 
                     <div className="md:col-span-3">
                         <label for="city">Occupation</label>
-                        <input  defaultValue={eventState.occupation} type="text" name="speakerCompany" id="speakerCompany" 
+                        <input  defaultValue={mentorState.occupation} type="text" name="speakerCompany" id="speakerCompany" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="Company name"
                                 onChange={(e)=>{
-                                    setEventState({
-                                        ...eventState,
-                                        speaker_company: e.target.value
+                                    setmentorState({
+                                        ...mentorState,
+                                        occupation: e.target.value
                                     })
                                 }}
                                 />
                     </div>
                     <div className="md:col-span-2">
                         <label for="city">Company</label>
-                        <input  defaultValue={eventState.position} type="text" name="speakerRole" id="speakerRole" 
+                        <input  defaultValue={mentorState.company} type="text" name="speakerRole" id="speakerRole" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="Proffesion"
                                 onChange={(e)=>{
-                                    setEventState({
-                                        ...eventState,
-                                        speaker_job: e.target.value
+                                    setmentorState({
+                                        ...mentorState,
+                                        position: e.target.value
                                     })
                                 }}
                                 />
                     </div>
                     <div className="md:col-span-3">
                         <label for="city">Position</label>
-                        <input  defaultValue={eventState.position} type="text" name="speakerRole" id="speakerRole" 
+                        <input  defaultValue={mentorState.position} type="text" name="speakerRole" id="speakerRole" 
                                 className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="Proffesion"
                                 onChange={(e)=>{
-                                    setEventState({
-                                        ...eventState,
-                                        speaker_job: e.target.value
+                                    setmentorState({
+                                        ...mentorState,
+                                        company: e.target.value
                                     })
                                 }}
                                 />

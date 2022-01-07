@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function EventDetailProps({eventData}){
     
     // const [eventState, SetEventState] = useState(eventData)
-
+    console.log(eventData[0])
 
     return(
         <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 m-8">
@@ -21,8 +21,8 @@ export default function EventDetailProps({eventData}){
             </div>
             <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                 <div className="mt-2 border-dashed border rounded w-fit ">
-                <img className="w-140" src={eventData.cover}></img>
-                </div>
+                <img className="w-140" src={eventData[0].cover}></img>
+            </div>
                 <div className="lg:col-span-2">
                         <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                         <div className="md:col-span-5">
@@ -31,7 +31,7 @@ export default function EventDetailProps({eventData}){
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" 
                                     placeholder="Event Title"
                                     disabled
-                                    value={eventData.event_name}
+                                    value={eventData[0].event_name}
                                     disabled    
                             />
                         </div>
@@ -41,7 +41,7 @@ export default function EventDetailProps({eventData}){
                             <textarea   name="description" id="description" 
                                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
                                         placeholder="New Description"
-                                        value={eventData.Description}
+                                        value={eventData[0].description}
                                         disabled            
                             />
                         </div>
@@ -51,7 +51,7 @@ export default function EventDetailProps({eventData}){
                             <input  type="text" name="speakerName" id="speakerName" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
                                     placeholder="Name of the speaker"
-                                    value={eventData.speaker}
+                                    value={eventData[0].speaker}
                                     disabled        
                             />
                         </div>
@@ -61,7 +61,7 @@ export default function EventDetailProps({eventData}){
                             <input  type="text" name="speakerCompany" id="speakerCompany" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
                                     placeholder="Company name"
-                                    value={eventData.speaker_company}
+                                    value={eventData[0].speaker_company}
                                     disabled
                             />
                         </div>
@@ -70,7 +70,7 @@ export default function EventDetailProps({eventData}){
                             <input  type="text" name="speakerRole" id="speakerRole" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
                                     placeholder="Proffesion"
-                                    value={eventData.speaker_job}
+                                    value={eventData[0].speaker_job}
                                     disabled
                             />
                         </div>
@@ -79,7 +79,7 @@ export default function EventDetailProps({eventData}){
                             <input  type="text" name="price" id="price" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
                                     placeholder="0"
-                                    value={eventData.date}
+                                    value={eventData[0].date.slice(0,10).replaceAll("-"," ")}
                                     disabled
                             />
                         </div>
@@ -88,7 +88,7 @@ export default function EventDetailProps({eventData}){
                             <input  type="text" name="price" id="price" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
                                     placeholder="0"
-                                    value={eventData.start_time}
+                                    value={`${eventData[0].started_at.slice(11,16)} - ${eventData[0].finish_at.slice(11,16)} WIB`}
                                     disabled
                                     />
                         </div>
@@ -97,7 +97,7 @@ export default function EventDetailProps({eventData}){
                             <input  type="number" name="price" id="price" 
                                     className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  
                                     placeholder="0"
-                                    value={eventData.price}
+                                    value={eventData[0].price}
                                     disabled
                                     />
                         </div>

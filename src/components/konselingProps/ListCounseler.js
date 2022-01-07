@@ -9,7 +9,7 @@ export default function ListCounseler({counselorData}){
         comps.push(
             <div class="bg-white w-full flex items-center p-2 rounded-xl shadow border hover:bg-gray-100 cursor-pointer relative">
                 <div class="relative flex items-center space-x-4">
-                    <img src={value.cover} alt="My profile" class="w-16 h-16 rounded-full"/>
+                    <img src={value.photo} alt="My profile" class="w-16 h-16 rounded-full"/>
                     
                     <span class= {`absolute h-4 w-4 ${value.activity ? "bg-green-400" : "bg-gray-400"} rounded-full bottom-0 right-0 border-2 border-white`} ></span>
                 </div>
@@ -38,12 +38,12 @@ export default function ListCounseler({counselorData}){
                             document.getElementById(`pop_${value.id}`).style.display = "none"
                         }}
                         class="absolute right-0 top-10 mt-2 py-2 w-40 bg-white rounded-md shadow-xl z-20 hidden">
-                    <Link href={`/counseling/mentoredit/${value.id}`}>
+                    <Link href={`/counseling/mentoredit/${value.ID}`}>
                         <a class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                         Edit
                         </a>
                     </Link>
-                    <Link href={`/counseling/mentordetail/${value.id}`}>
+                    <Link href={`/counseling/mentordetail/${value.ID}`}>
                         <a class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                         Detail
                         </a>

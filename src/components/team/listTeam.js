@@ -1,63 +1,53 @@
+
 import DataTable from 'react-data-table-component';
 import Link from 'next/link';
-import CONFIG from '../../services/CONFIG';
-import Cookies from 'js-cookie';
-import Swal from 'sweetalert2';
-export default function ListEvents({eventData}){
+
+export default function TeamList({teamData}){
 
     async function deleteEvent(id) {
-        await fetch(`${CONFIG.BASE_URL}/events/${id}`,{
-            method: "DELETE",
-            headers: {
-                "Token" : Cookies.get("Token")
-            }
+        await fetch(`https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/team/${id}`,{
+            method: "DELETE"
         }).then(()=>{
-            // location.reload();
-            Swal.fire(
-                'Good job!',
-                'Event has been deleted!',
-                'success'
-              ).then(()=>{
-                  location.reload()
-              })
-        }).catch(err=>console.log(err))
+            location.reload();
+        })
     }
 
     const columns=[
         {
             name: "Id",
-            selector: (row) => row.ID,
+            selector: (row) => row.id,
             maxWidth:"1%"
         },
         {
-            name: "Title",
-            selector: (row) => row.event_name
+            name: "avatar",
+            // selector: (row) => row.event_name
+            cell: (row)=>(
+                <div className="justify-items-start">
+                    <img src={row.photo} className='w-24'></img>
+                </div>
+            )
+
+            
         },
         {
-            name: "Speaker",
-            selector: (row) => row.speaker
+            name: "Name",
+            selector: (row) => row.name
         },
         {
-            name: "Date",
-            selector: (row) => {
-                return row.date.slice(0,10).replaceAll("-"," ")
-            }
+            name: "Email",
+            selector: (row) => row.email
         },
         {
-            name: "Start At",
-            selector: (row) => {
-                return `${row.started_at.slice(11,16)} WIB`
-            }
+            name: "Phone number",
+            selector: (row) => row.phone_number
         },
         {
-            name: "End At",
-            selector: (row) => {
-                return `${row.finish_at.slice(11,16)} WIB`
-            }
+            name: "Position",
+            selector: (row) => row.position
         },
         {
-            name: "Price",
-            selector: (row) => row.price
+            name: "Occupation",
+            selector: (row) => row.occupation
         },
         {
             name: "Action",
@@ -67,14 +57,14 @@ export default function ListEvents({eventData}){
             center: true,
             cell: (row) => (
               <div className="justify-items-start">
-                <Link href={`/events/edit/${row.ID}`}>
+                <Link href={`/team/staffedit/${row.id}`}>
                   <button className="m-1 w-[44px] h-[22px] border border-[#4FE34E] rounded-sm bg-[#eaf4e8] hover:bg-[#ADC6FF] text-[#3CC13B] ">Edit</button>
                 </Link>
-                <Link href={`/events/details/${row.ID}`}>
+                <Link href={`/team/staffdetail/${row.id}`}>
                   <button className="m-1 w-[44px] h-[22px] border border-[#ADC6FF] rounded-sm bg-[#F0F5FF] hover:bg-[#ADC6FF] text-[#2F54EB] ">Detail</button>
                 </Link>
                   <button onClick={()=>{
-                    deleteEvent(row.ID);
+                    deleteEvent(row.id);
                   }} className="m-1 w-[44px] h-[22px] border border-[#FFA39E] rounded-sm bg-[#FFF1F0] hover:bg-[#ADC6FF] text-[#F5222D] ">Delete</button>
               </div>
             ),
@@ -83,9 +73,9 @@ export default function ListEvents({eventData}){
     return(
         <div className='w-full h-full p-8'>
             <DataTable
-                title="Event List"
+                title="Team List"
                 columns={columns}
-                data={eventData.eventData}
+                data={teamData}
                 direction="auto"
                 pointerOnHover
                 responsive

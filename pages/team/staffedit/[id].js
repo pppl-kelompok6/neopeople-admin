@@ -1,27 +1,26 @@
-import CounselerDetailProps from "../../../src/components/konselingProps/detailCounseler";
 import Layout from "../../../src/components/MainLayout"
-import CONFIG from "../../../src/services/CONFIG";
-
+import TeamEditProps from "../../../src/components/team/editTeam";
 // import { useRouter } from 'next/router'
+
 export const getServerSideProps = async context =>{
     // const router = useRouter()
     // const { id } = router.query
     const {params} = context
-    const res = await fetch(`${CONFIG.BASE_URL}/counselor/${params.id}`);
+    const res = await fetch(`https://61cf0c2865c32600170c7e9e.mockapi.io/neopeople/team/${params.id}`);
   
     const data = await res.json();
     
     return{
-      props: {mentorData : data}
+      props: {teamData : data}
     }
 }
 
-export default function MentorEdit(mentorData){
-    console.log(mentorData)
+export default function TeamEdit(teamData){
+    console.log(teamData.teamData)
     return(
         <Layout>
         <div className='h-fit flex flex-col items-center justify-center gap-4'>
-            <CounselerDetailProps mentorData={mentorData.mentorData}/>
+          <TeamEditProps teamData={teamData.teamData}/>
         </div>
         </Layout>
     )

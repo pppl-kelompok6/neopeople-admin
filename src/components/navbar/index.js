@@ -1,7 +1,16 @@
+import Cookies from "js-cookie";
+import Router from "next/router";
 import { useState } from "react"
 
 export default function Navbar(){
     const [open, setOpen] = useState(false);
+
+    function logOut(){
+        Cookies.remove("refreshToken");
+        Cookies.remove("Token")
+        Router.push("/auth")
+    }
+
     return(
         <header class="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-800">
             {/* <!-- Informação --> */}
@@ -31,7 +40,9 @@ export default function Navbar(){
                     <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                     Settings
                     </a>
-                    <a href="/auth" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+                    <a href="/auth" onClick={()=>{
+                        logOut()
+                    }} class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                     Sign Out
                     </a>
                 </div>

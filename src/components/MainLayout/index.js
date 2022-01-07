@@ -13,31 +13,25 @@ export default function Layout(props) {
             id: 1,
             name: "Dashboard",
             desc: "Sara was replied on the.",
-            position:"top-[160px]"
+            position:"top-[210px]"
         },
         {
             id: 2,
             name: "Event",
             desc: "Sara was replied on the.",
-            position: "top-[240px]"
+            position: "top-[280px]"
         },
         {
             id: 3,
             name: "Counseling",
             desc: "Sara was replied on the.",
-            position: "top-[325px]"
-        },
-        {
-            id: 4,
-            name: "Money",
-            desc: "Sara was replied on the.",
-            position: "top-[405px]"
+            position: "top-[360px]"
         },
         {
             id: 5,
             name: "Team",
             desc: "Sara was replied on the.",
-            position: "top-[485px]"
+            position: "top-[440px]"
         }
       ]
       
