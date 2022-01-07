@@ -5,6 +5,19 @@ export default function ListCounseler({counselorData}){
 
     const comps = []
 
+    async function deleteCounselor(id) {
+        await fetch(`${CONFIG.BASE_URL}/counselor/${id}`,{
+            method: "DELETE",
+            headers: {
+                'Content-Type':'application/json'
+            },
+        }).then(()=>{
+            console.log("berhasil")
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
     counselorData.map((value, key)=>{
         comps.push(
             <div class="bg-white w-full flex items-center p-2 rounded-xl shadow border hover:bg-gray-100 cursor-pointer relative">
@@ -49,7 +62,7 @@ export default function ListCounseler({counselorData}){
                         </a>
                     </Link>                    
                     <a  onClick={()=>{
-
+                        deleteCounselor(value.ID)
                     }}
                         class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                     Delete

@@ -1,31 +1,82 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
-import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
+import {
+  ViewState, IntegratedEditing, EditingState,
+} from '@devexpress/dx-react-scheduler';
 import {
   Scheduler,
-  DayView,
-  WeekView,
+  Resources,
   Appointments,
-  AppointmentForm,
   AppointmentTooltip,
-  ConfirmationDialog,
+  DayView,
+  DragDropProvider,
+  AppointmentForm,
 } from '@devexpress/dx-react-scheduler-material-ui';
+import {
+  teal, indigo,
+} from '@material-ui/core/colors';
 
+const appointments = [{
+  id: 0,
+  title: 'Watercolor Landscape',
+  members: [1, 2],
+  roomId: 1,
+  startDate: new Date(2017, 4, 28, 9, 30),
+  endDate: new Date(2017, 4, 28, 12, 0),
+}, {
+  id: 1,
+  title: 'Oil Painting for Beginners',
+  members: [1],
+  roomId: 2,
+  startDate: new Date(2017, 4, 28, 12, 30),
+  endDate: new Date(2017, 4, 28, 14, 30),
+}, {
+  id: 2,
+  title: 'Testing',
+  members: [1],
+  roomId: 1,
+  startDate: new Date(2017, 4, 29, 12, 30),
+  endDate: new Date(2017, 4, 29, 14, 30),
+}, {
+  id: 3,
+  title: 'Final exams',
+  members: [2],
+  roomId: 2,
+  startDate: new Date(2017, 4, 29, 9, 30),
+  endDate: new Date(2017, 4, 29, 12, 0),
+}];
+
+const owners = [{
+  text: 'Andrew Glover',
+  id: 1,
+  color: indigo,
+}, {
+  text: 'Arnie Schwartz',
+  id: 2,
+  color: teal,
+}];
+
+const locations = [
+  { text: 'Room 1', id: 1 },
+  { text: 'Room 2', id: 2 },
+];
 
 export default class Calender extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {
-            title: "Web",
-            startDate: new Date(2018, 5, 25, 9, 30),
-            endDate: new Date(2018, 5, 25, 11, 30),
-            id: 0,
-            location: "Room 1",
-          },
-      ],
-      currentDate: '2021-12-27',
+      data: appointments,
+      resources: [{
+        fieldName: 'members',
+        title: 'Members',
+        instances: owners,
+        allowMultiple: false,
+      }, {
+        fieldName: 'Room',
+        title: 'Location',
+        instances: locations,
+      }],
+
     };
 
     this.commitChanges = this.commitChanges.bind(this);
@@ -37,6 +88,7 @@ export default class Calender extends React.PureComponent {
       if (added) {
         const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
         data = [...data, { id: startingAddedId, ...added }];
+        console.log(added)
       }
       if (changed) {
         data = data.map(appointment => (
@@ -50,37 +102,39 @@ export default class Calender extends React.PureComponent {
   }
 
   render() {
-    const { currentDate, data } = this.state;
+    const { data, resources } = this.state;
 
     return (
-      <div className='container'>
-        <Paper>
-          <Scheduler
-            data={data}
-            height={660}
-          >
-            <ViewState
-              currentDate={currentDate}
-            />
-            <EditingState
-              onCommitChanges={this.commitChanges}
-            />
-            <IntegratedEditing />
-            <WeekView
-              startDayHour={9}
-              endDayHour={19}
+      <Paper className="rounded border w-full">
+        <Scheduler
+          data={data}
+        >
+          <ViewState
+            defaultCurrentDate="2017-05-28"
+          />
+          <EditingState
+            onCommitChanges={this.commitChanges}
+          />
 
-            />
-            <ConfirmationDialog />
-            <Appointments />
-            <AppointmentTooltip
-              showOpenButton
-              showDeleteButton
-            />
-            <AppointmentForm />
-          </Scheduler>
-        </Paper>
-      </div>
+
+          <DayView
+            startDayHour={9}
+            endDayHour={15}
+            intervalCount={7}
+          />
+          <Appointments />
+          <Resources
+            data={resources}
+            mainResourceName="members"
+          />
+
+          <IntegratedEditing />
+
+          <AppointmentTooltip showOpenButton />
+          <AppointmentForm />
+          <DragDropProvider />
+        </Scheduler>
+      </Paper>
     );
   }
 }

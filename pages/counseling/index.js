@@ -23,7 +23,7 @@ export const getServerSideProps = async context =>{
 }
 
 export default function Counseling(counselorData) {
-  console.log(counselorData.counselorData)
+
   return (
       <Layout>
           <div className="bg-white rounded shadow-lg p-8 m-8 px-4 ">
@@ -36,7 +36,7 @@ export default function Counseling(counselorData) {
               <div className="sm:col-span-1 col-span-3">
                 <ListCounseler counselorData={counselorData.counselorData}/>
               </div>
-              <div className="sm:col-span-2 col-span-3">
+              <div className="sm:col-span-2 col-span-3 overflow-hidden">
                 <Calender/>
               </div>
                 

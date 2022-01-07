@@ -21,7 +21,7 @@ export default function MentorEdit(mentorData){
     return(
         <Layout>
         <div className='h-fit flex flex-col items-center justify-center gap-4'>
-            <CounselerDetailProps mentorData={mentorData.mentorData}/>
+            <CounselerDetailProps mentorData={mentorData.mentorData[0]}/>
         </div>
         </Layout>
     )
