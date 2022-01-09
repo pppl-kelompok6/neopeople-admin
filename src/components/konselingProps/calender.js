@@ -11,6 +11,7 @@ import {
   DayView,
   DragDropProvider,
   AppointmentForm,
+  WeekView,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import {
   teal, indigo,
@@ -21,8 +22,8 @@ const appointments = [{
   title: 'Watercolor Landscape',
   members: [1, 2],
   roomId: 1,
-  startDate: new Date(2017, 4, 28, 9, 30),
-  endDate: new Date(2017, 4, 28, 12, 0),
+  startDate: new Date("2022-01-01T16:30:00.000Z"),
+  endDate: new Date(2022, 1, 1, 12, 0),
 }, {
   id: 1,
   title: 'Oil Painting for Beginners',
@@ -65,7 +66,7 @@ export default class Calender extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      data: appointments,
+      data: this.props.sessionData,
       resources: [{
         fieldName: 'members',
         title: 'Members',
@@ -76,20 +77,18 @@ export default class Calender extends React.PureComponent {
         title: 'Location',
         instances: locations,
       }],
-
     };
-
+    console.log(this.props.sessionData)
+    console.log(this.state.data)
     this.commitChanges = this.commitChanges.bind(this);
   }
-
   commitChanges({ added, changed, deleted }) {
     this.setState((state) => {
       let { data } = state;
       if (added) {
-        const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-        data = [...data, { id: startingAddedId, ...added }];
-        console.log(added)
-      }
+        // const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
+        // data = [...data, { id: startingAddedId, ...added }];
+     }
       if (changed) {
         data = data.map(appointment => (
           changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
@@ -106,21 +105,22 @@ export default class Calender extends React.PureComponent {
 
     return (
       <Paper className="rounded border w-full">
-        <Scheduler
+        <Scheduler height={660}
           data={data}
         >
           <ViewState
-            defaultCurrentDate="2017-05-28"
+            defaultCurrentDate= {Date.now()}
           />
           <EditingState
             onCommitChanges={this.commitChanges}
           />
 
 
-          <DayView
-            startDayHour={9}
-            endDayHour={15}
-            intervalCount={7}
+          <WeekView
+            startDayHour={13}
+            endDayHour={23}
+            // intervalCount={7}
+            
           />
           <Appointments />
           <Resources
