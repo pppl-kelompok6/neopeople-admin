@@ -7,3 +7,84 @@
     height: 100% !important;
     max-height: 400px !important;
 }
+
+.high-intensity{
+    background: #34cbef;
+    display: block;
+    height: 100%;
+  }
+  
+  hr {
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  .rbc-calendar {
+    margin-top: 20px;
+    min-height: 600px;
+    color: #999;
+    font: 300 0.85em/1.5 "Nunito", sans-serif;
+  }
+  
+  .rbc-time-header > .rbc-row:nth-of-type(2) {
+    display: none !important;
+  }
+  
+  .rbc-time-content {
+    border: none;
+  }
+  
+  .rbc-timeslot-group {
+    min-height: 50px;
+  }
+  
+  .rbc-today {
+    background: none;
+  }
+  
+  .rbc-label {
+    text-align: right;
+  }
+  
+  .rbc-event {
+    background: #eee;
+    color: #505359;
+    border-radius: 0;
+  }
+  
+  .rbc-day-slot .rbc-event {
+    border: 1px solid #fff;
+  }
+  
+  .rbc-event.rbc-selected {
+      background-color: #34cbef;
+  }
+  
+  .rbc-time-view {
+    border: none;
+  }
+  
+  .rbc-time-gutter.rbc-time-column > .rbc-timeslot-group {
+    border: none;
+  }
+  
+  .rbc-label.rbc-header-gutter {
+    border: none;
+  }
+  .rbc-time-header > .rbc-row > * + * {
+    border-left: 1px solid #eee;
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;
+  }
+  
+  .rbc-header {
+    border-bottom: 1px solid #eee;
+  }
+  
+  .rbc-time-header > .rbc-row:first-child {
+    border-bottom: none;
+  }
+  
+  .rbc-time-content .rbc-day-slot.rbc-time-column:last-child {
+    border-right: 1px solid #eee;
+  }
+  

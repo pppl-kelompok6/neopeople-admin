@@ -30,15 +30,16 @@ export const getServerSideProps = async context =>{
   }
   return{
     props:{
-      sessionData, counselorData
+      sessionData, counselorData, cookies
     }
   }
 }
 
 export default function Counseling(props) {
-  console.log(props)
+  console.log(props.sessionData)
   const appoints = Caldata(props.sessionData)
-  console.log(typeof(appoints))
+  const token = props.cookies
+  console.log(appoints)
   return (
       <Layout>
           <div className="bg-white rounded shadow-lg p-8 m-8 px-4 ">
@@ -46,15 +47,14 @@ export default function Counseling(props) {
                     <p className="font-medium text-lg">Counseling Manager</p>
                     <p>Please fill out all the fields.</p>
                 </div>
-            <div className="grid grid-cols-3 gap-8  ">
-              
+            <div className="grid grid-cols-3 gap-8 relative">
               <div className="sm:col-span-1 col-span-3">
                 <ListCounseler counselorData={props.counselorData}/>
               </div>
               <div className="sm:col-span-2 col-span-3 overflow-hidden">
-                <Calender sessionData = {appoints}/>
+                <Calender sessionData = {appoints} token={token}/>
               </div>
-                
+              {/* <PopCard/> */}
             </div>
           </div>
       </Layout>

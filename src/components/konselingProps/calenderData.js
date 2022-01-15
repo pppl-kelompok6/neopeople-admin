@@ -3,8 +3,8 @@ export default function Caldata(data){
         return ""
     }else{
         data.forEach(element => {
-            element["startdate"] = new Date(element["startdate"])
-            element["enddate"] = new Date(element["enddate"])
+            element["start"] = element["start"].slice(0, 19);
+            element["end"] = element["end"].slice(0, 19);
         });
         return data
     }

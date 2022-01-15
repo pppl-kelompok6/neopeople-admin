@@ -51,6 +51,7 @@ export default function Events(eventData) {
       <>
       <Layout>
         <div className='h-fit flex flex-col items-center justify-center gap-4'>
+          
           <CreateEvent setWidget={setWidget} widget={widget} cover={cover}/>
           <ListEvents eventData= {eventData}/>
         </div>

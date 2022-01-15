@@ -1,140 +1,149 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
 import {
-  ViewState, IntegratedEditing, EditingState,
-} from '@devexpress/dx-react-scheduler';
-import {
   Scheduler,
-  Resources,
+  DayView,
+  WeekView,
   Appointments,
   AppointmentTooltip,
-  DayView,
-  DragDropProvider,
   AppointmentForm,
-  WeekView,
+  ConfirmationDialog
 } from '@devexpress/dx-react-scheduler-material-ui';
-import {
-  teal, indigo,
-} from '@material-ui/core/colors';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { EditingState, IntegratedEditing, ViewState } from '@devexpress/dx-react-scheduler';
+import { NewSessionCreate, SessionEdit } from '../../services/session';
 
-const appointments = [{
-  id: 0,
-  title: 'Watercolor Landscape',
-  members: [1, 2],
-  roomId: 1,
-  startDate: new Date("2022-01-01T16:30:00.000Z"),
-  endDate: new Date(2022, 1, 1, 12, 0),
-}, {
-  id: 1,
-  title: 'Oil Painting for Beginners',
-  members: [1],
-  roomId: 2,
-  startDate: new Date(2017, 4, 28, 12, 30),
-  endDate: new Date(2017, 4, 28, 14, 30),
-}, {
-  id: 2,
-  title: 'Testing',
-  members: [1],
-  roomId: 1,
-  startDate: new Date(2017, 4, 29, 12, 30),
-  endDate: new Date(2017, 4, 29, 14, 30),
-}, {
-  id: 3,
-  title: 'Final exams',
-  members: [2],
-  roomId: 2,
-  startDate: new Date(2017, 4, 29, 9, 30),
-  endDate: new Date(2017, 4, 29, 12, 0),
-}];
-
-const owners = [{
-  text: 'Andrew Glover',
-  id: 1,
-  color: indigo,
-}, {
-  text: 'Arnie Schwartz',
-  id: 2,
-  color: teal,
-}];
-
-const locations = [
-  { text: 'Room 1', id: 1 },
-  { text: 'Room 2', id: 2 },
+const currentDate = Date.now();
+const schedulerData = [
+  { startDate: '2022-01-11T09:45:00', endDate: '2022-01-11T11:00:00', title: 'Meeting' },
+  { startDate: '2022-01-13T12:00:00', endDate: '2022-01-13T13:30:01', title: 'Go to a gym' },
 ];
 
-export default class Calender extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: this.props.sessionData,
-      resources: [{
-        fieldName: 'members',
-        title: 'Members',
-        instances: owners,
-        allowMultiple: false,
-      }, {
-        fieldName: 'Room',
-        title: 'Location',
-        instances: locations,
-      }],
-    };
-    console.log(this.props.sessionData)
-    console.log(this.state.data)
-    this.commitChanges = this.commitChanges.bind(this);
+export default function Calender({sessionData}){
+  const [counselor, setCounselor] = useState([]);
+  const [editId, setEditId] = useState(0);
+  const [putSession, setPutSession] = useState({})
+
+  
+  const mappingAp = (appointment) =>{
+    return({
+      id: appointment.ID,
+      startDate: appointment.start,
+      endDate: appointment.end,
+      title: appointment.title,
+      notes: appointment.note
+    })
   }
-  commitChanges({ added, changed, deleted }) {
-    this.setState((state) => {
-      let { data } = state;
-      if (added) {
-        // const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-        // data = [...data, { id: startingAddedId, ...added }];
-     }
-      if (changed) {
-        data = data.map(appointment => (
-          changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment));
+  
+  const mappingData = (data) =>{
+    const startStr= data.startDate.toString().split(" ");
+    const endStr= data.endDate.toString().split(" ");
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    
+    const monthStart = []
+    const monthEnd = []
+    months.map((month, i = 0)=>{
+      i = i + 1;
+      if(month === startStr[1]){
+        if(i<10){
+          monthStart.push(`0${i}`)
+        }else{
+          monthStart.push(i.toString())
+        }
       }
-      if (deleted !== undefined) {
-        data = data.filter(appointment => appointment.id !== deleted);
+    })
+
+    months.map((month, i = 0)=>{
+      i++;
+      if(month == endStr[1]){
+        if(i<10){
+          monthEnd.push(`0${i}`)
+        }else{
+          monthEnd.push(i.toString())
+        }
       }
-      return { data };
-    });
+    }) 
+    const start = `${startStr[3]}-${monthStart[0]}-${startStr[2]} ${startStr[4]}`
+    const end = `${endStr[3]}-${monthEnd[0]}-${endStr[2]} ${endStr[4]}`
+    return({
+      start: start,
+      end: end,
+      title: data.title,
+      note: "https://meet.google.com/eak-caaa-aot"
+    })
   }
 
-  render() {
-    const { data, resources } = this.state;
-
-    return (
-      <Paper className="rounded border w-full">
-        <Scheduler height={660}
-          data={data}
-        >
-          <ViewState
-            defaultCurrentDate= {Date.now()}
-          />
-          <EditingState
-            onCommitChanges={this.commitChanges}
-          />
+  useEffect(()=>{
+    const dataArr = []
+    sessionData.map(event=>{
+        dataArr.push(mappingAp(event))
+    })
+    console.log(dataArr)
+    setCounselor(dataArr)
+  },[])
 
 
-          <WeekView
-            startDayHour={13}
-            endDayHour={23}
-            // intervalCount={7}
-            
-          />
-          <Appointments />
-          <Resources
-            data={resources}
-            mainResourceName="members"
-          />
-
-          <IntegratedEditing />
-
-          <AppointmentTooltip showOpenButton />
-          <AppointmentForm />
-          <DragDropProvider />
-        </Scheduler>
-      </Paper>
-    );
+  async function AddNew(added) {
+    const payload = mappingData(added);
+    console.log(payload)
+    const data = await NewSessionCreate(payload);
+    console.log(data)
   }
+  
+  async function EditEvent(params) {
+    const payload = putSession;
+    const data = await SessionEdit(id, payload)  
+  }
+
+  return(
+    <Paper>
+    <Scheduler data={counselor} height={660}>
+      <ViewState
+        currentDate="2022-01-12"/>
+      <WeekView/>
+      {/* <DayView/> */}
+      <EditingState
+        onCommitChanges={({added, changed, deleted})=>{
+          if(added){
+            AddNew(added)
+            console.log(added)
+          }else if(changed){
+            const editCounselor = {
+              endDate: "",
+              notes: "",
+              startDate: "",
+              title: ""
+            }
+            counselor.map(event=>{
+              if(changed[event.id]){
+                const newEdit = changed[event.id]
+                const keys = ["startDate", "endDate", "title", "notes"]
+                keys.map(key=>{
+                  if(newEdit[key]){
+                    editCounselor[key] = newEdit[key]
+                  }
+                })
+                const final = mappingData(editCounselor) 
+                setPutSession(final)
+                // setEditCounselor({
+                //   ...editCounselor,
+                //   newEdit
+                // })
+
+              }
+            })
+          }
+        }}/>
+        <IntegratedEditing/>
+        <ConfirmationDialog/>
+      <Appointments />
+      <AppointmentTooltip
+          showCloseButton
+          showDeleteButton
+          showOpenButton/>
+      <AppointmentForm/>
+    </Scheduler>
+  </Paper>
+  );
 }

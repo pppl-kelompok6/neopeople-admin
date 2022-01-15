@@ -12,4 +12,17 @@ async function detailEventsGet(params) {
     console.log(data)
 }
 
-export {detailEventsGet}
+async function NewEventCreate(params) {
+  const res = await fetch(`${CONFIG.BASE_URL}/events`, {
+    method:"POST",
+    headers:{
+      "Token": Cookies.get("Token"),
+      "Content-Type": "application/json"
+    },
+    body: params
+  })
+  const data = await res.json();
+  return data
+}
+
+export {detailEventsGet, NewEventCreate}
