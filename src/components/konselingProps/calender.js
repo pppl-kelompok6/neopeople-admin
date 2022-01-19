@@ -22,7 +22,7 @@ const schedulerData = [
 
 export default function Calender({sessionData}){
   const [counselor, setCounselor] = useState([]);
-  const [editId, setEditId] = useState(0);
+  const [editId, setEditId] = useState(null);
   const [putSession, setPutSession] = useState({})
 
   
@@ -87,13 +87,14 @@ export default function Calender({sessionData}){
   async function AddNew(added) {
     const payload = mappingData(added);
     console.log(payload)
-    const data = await NewSessionCreate(payload);
-    console.log(data)
+    await NewSessionCreate(payload);
+
   }
   
-  async function EditEvent(params) {
-    const payload = putSession;
-    const data = await SessionEdit(id, payload)  
+  async function EditEvent(id, params) {
+    const payload = params;
+    const data = await SessionEdit(id, payload)
+    console.log(data)  
   }
 
   return(
@@ -110,29 +111,42 @@ export default function Calender({sessionData}){
             console.log(added)
           }else if(changed){
             const editCounselor = {
-              endDate: "",
-              notes: "",
-              startDate: "",
+              end: "",
+              note: "",
+              start: "",
               title: ""
             }
             counselor.map(event=>{
               if(changed[event.id]){
+                // console.log(event.id)
+                setEditId(event.id)
                 const newEdit = changed[event.id]
                 const keys = ["startDate", "endDate", "title", "notes"]
-                keys.map(key=>{
-                  if(newEdit[key]){
-                    editCounselor[key] = newEdit[key]
+                const keysFinal = ["start", "end", "title", "note"]
+
+                for(let i = 0; i<keys.length; i++){
+                  event["startDate"] = event["startDate"].replace("T", " ");
+                  event["endDate"] = event["endDate"].replace("T", " ");
+                  
+                  if(newEdit[keys[i]]){
+                    editCounselor[keysFinal[i]] = newEdit[keys[i]]
+                  }else{
+                    editCounselor[keysFinal[i]] = event[keys[i]]
                   }
-                })
-                const final = mappingData(editCounselor) 
-                setPutSession(final)
+                  // console.log(editCounselor[keysFinal[i]])
+                }
+                console.log(editCounselor)
+                setPutSession(editCounselor)
+                // console.log(editId)
                 // setEditCounselor({
                 //   ...editCounselor,
                 //   newEdit
                 // })
-
               }
             })
+            console.log(putSession)
+            console.log(editId)
+            EditEvent(editId, putSession)
           }
         }}/>
         <IntegratedEditing/>
@@ -141,7 +155,8 @@ export default function Calender({sessionData}){
       <AppointmentTooltip
           showCloseButton
           showDeleteButton
-          showOpenButton/>
+          showOpenButton
+      />
       <AppointmentForm/>
     </Scheduler>
   </Paper>

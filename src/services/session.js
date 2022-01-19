@@ -15,7 +15,7 @@ async function NewSessionCreate(params) {
 }
 
 async function SessionEdit(id, params) {
-  const res = await fetch(`${CONFIG.BASE_URL}/session/${id}`, {
+  const res = await fetch(`${CONFIG.BASE_URL}/session/${parseInt(id)}`, {
     method:"PUT",
     headers:{
       "Token": Cookies.get("Token"),
